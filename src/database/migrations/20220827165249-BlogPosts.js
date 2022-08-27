@@ -1,43 +1,47 @@
 'use strict';
 
-const { STRING } = require("sequelize");
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
    
     await queryInterface.createTable('BlogPosts', { 
       id: {
+        type:Sequelize.INTEGER,
         allowNull:false,
         autoIncrement:true,
         primaryKey:true,
-        type:Sequelize.INTEGER
+        onDelete:'CASCADE',
+        onUpdate: 'CASCADE',
       },
     title: {
       allowNull:false,
       type: Sequelize.STRING
     },
-    contente: {
-      allowNull:false,
+    content: {
       type:Sequelize.STRING,
+      allowNull:false,
     },
     userId: {
+      type:Sequelize.INTEGER,
       allowNull:false,
-      type:Sequelize.STRING,
       references:{
-        model:'Users',
-        key:'id',
+      model:'Users',
+      key:'id'
       },
       onDelete:'CASCADE',
-      onUpdata:'CASCADE',
+      onUpdate:'CASCADE',
     },
     published:{
-      type:Sequelize.DATE
+      type:Sequelize.DATE,
     },
     updated:{
-      type:Sequelize.DATE
+      type:Sequelize.DATE,
     },
 
-   });
+   },
+   {
+    timestamps: false,
+  }
+  );
   },
 
   down: async (queryInterface, _Sequelize) => {

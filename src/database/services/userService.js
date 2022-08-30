@@ -39,9 +39,17 @@ const creatUser = async (body) => {
 };
 
 const listUser = async () => {
- const result = await User.findAll({ attributes: { exclude: ['password'] },
+ const result = await User.findAll({ attributes: { exclude: 'password' },
  });
  return { data: result, code: 200 };
 };
 
-module.exports = { login, creatUser, listUser };
+const listUserId = async ({ id }) => {
+  const result = await User.findByPk(id, { attributes: { exclude: 'password' } });
+  if (!result) {
+    return { error: { message: 'User does not exist' }, code: 404 };
+  }
+  return { data: result, code: 200 };
+};
+
+module.exports = { login, creatUser, listUser, listUserId };

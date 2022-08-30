@@ -2,7 +2,8 @@ const express = require('express');
 const {
      loginController,
      controllerCreate,
-      controllerGetAll,
+    controllerGetAll,
+    controllerGetId,
      } = require('./database/controllers/userController');
 // ...
 const app = express();
@@ -26,6 +27,8 @@ const {
  controllerCreate);
  
  app.get('/user', chekToken, controllerGetAll);
+
+ app.get('/user/:id', chekToken, controllerGetId);
 // ...
 
 // É importante exportar a constante `app`,

@@ -1,11 +1,21 @@
 const User = (sequelize, DataTypes) => {
   const User = sequelize.define("User", {
-    id: DataTypes.INTERGER,
+    id:{
+      type:DataTypes.INTEGER,
+      primaryKey:true,
+      autoIncrement: true
+        } ,
     displayName: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    image: DataTypes.STRING,
-  });
+    // email: {
+    //   type:DataTypes.STRING,
+    //   unique: true
+    // },
+      email:DataTypes.STRING,
+      password: DataTypes.STRING,
+      image: DataTypes.STRING,
+  },
+  { timestamps: false }
+  );
 
   return User;
 };

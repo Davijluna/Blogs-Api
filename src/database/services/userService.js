@@ -38,4 +38,10 @@ const creatUser = async (body) => {
   return { data: validToken, code: 201 };
 };
 
-module.exports = { login, creatUser };
+const listUser = async () => {
+ const result = await User.findAll({ attributes: { exclude: ['password'] },
+ });
+ return { data: result, code: 200 };
+};
+
+module.exports = { login, creatUser, listUser };

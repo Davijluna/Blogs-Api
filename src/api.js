@@ -1,5 +1,9 @@
 const express = require('express');
-const { loginController, controllerCreate } = require('./database/controllers/userController');
+const {
+     loginController,
+     controllerCreate,
+      controllerGetAll,
+     } = require('./database/controllers/userController');
 // ...
 const app = express();
 
@@ -9,16 +13,19 @@ const {
      lengthPassword,
  } = require('./middlewares/functionValidatin');
 
-app.use(express.json());
+ const chekToken = require('./middlewares/validToken');
 
-app.post('/login', loginController);
-
-app.post('/user', 
-    validCaracter,
-    validEmail,
-    lengthPassword,
-    controllerCreate);
-
+ app.use(express.json());
+ 
+ app.post('/login', loginController);
+ 
+ app.post('/user', 
+ validCaracter,
+ validEmail,
+ lengthPassword,
+ controllerCreate);
+ 
+ app.get('/user', chekToken, controllerGetAll);
 // ...
 
 // É importante exportar a constante `app`,

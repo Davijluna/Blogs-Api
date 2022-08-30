@@ -4,7 +4,6 @@ require('dotenv').config();
 
 const login = async (body) => {
   const { email, password } = body;
-  console.log(email, password, 'OIIII');
   if (email === '' || password === '') {
     return { error: { message: 'Some required fields are missing' }, code: 400 };
   }
@@ -19,7 +18,6 @@ const login = async (body) => {
     algorithm: 'HS256',
   });
   return { data: validToken, code: 200 };
-  // return validToken;
 };
 
 module.exports = { login };

@@ -20,4 +20,22 @@ const login = async (body) => {
   return { data: validToken, code: 200 };
 };
 
-module.exports = { login };
+// vamos ver se funciona kkkk
+// const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const creatUser = async (body) => {
+  const { displayName, email, password, image } = body;
+  
+    const user = await User.findOne({ where: { displayName, email, password, image } });
+    if (user) {
+      return { error: { message: 'User already registered' }, code: 400 };
+    }
+    const payload = { email };
+  const { JWT_SECRET } = process.env;
+  const validToken = jwt.sign(payload, JWT_SECRET, {
+    expiresIn: '7d',
+    algorithm: 'HS256',
+  });
+  return { data: validToken, code: 200 };
+};
+
+module.exports = { login, creatUser };

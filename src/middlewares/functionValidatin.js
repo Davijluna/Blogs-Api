@@ -1,23 +1,36 @@
-// const User = require('../database/models');
+// const user = require('../database/models/user');
 
-// // valida se todos os campos estão preenchidos.
-// const valideitor = async (req, res, next) => {
-//     const { params: { id } } = req;
-//     const result = await User(id);
+const validCaracter = (req, res, next) => {
+    const { displayName } = req.body;
+    if (!displayName) {
+        return res.status(400)
+        .json({ message: '"displayName" length must be at least 8 characters long' });
+    }
+    if (displayName.length < 8) {
+        return res.status(400)
+        .json({ message: '"displayName" length must be at least 8 characters long' });
+    }
+next();
+};
 
-//     if (!result) return res.status(400).json({ message: 'Some required fields are missing' });
-//     next();
-// };
+const validEmail = (req, res, next) => {
+    const { email } = req.body;
+    // const result = await User(body)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        return res.status(400)
+        .json({ message: '"email" must be a valid email' });
+      }
+      next();
+};
 
-// // valida se displayName e amail estão peenchidos
-// const validUser = async (req, res, next) => {
-//     const { password, email } = req.body;
-//     if (password === '' || email === '') {
-//         return res.status(400).json({ message: 'Invalid fields' });
-//     }
-//     next();
-// };
+const lengthPassword = (req, res, next) => {
+    const { password } = req.body;
+    if (password.length < 6) {
+        return res.status(400)
+        .json({ message: '"password" length must be at least 6 characters long' });
+      }
+      next();
+};
 
-// const tokenValidetion = async (re)
-
-// module.exports = { validUser, valideitor };
+module.exports = { validEmail, validCaracter, lengthPassword };

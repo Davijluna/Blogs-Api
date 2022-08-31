@@ -42,4 +42,18 @@ const validName = (req, res, next) => {
     next();
 };
 
-module.exports = { validEmail, validCaracter, lengthPassword, validName };
+const blogvalidetion = (req, res, next) => {
+    const { title, content, cotegoryIds } = req.body;
+    if (!title || !content || !cotegoryIds) {
+        return res.status(400)
+        .json({ message: 'Erro nas validações' });
+    }
+    next();
+};
+
+module.exports = {
+    validEmail,
+    validCaracter,
+    lengthPassword,
+    validName,
+    blogvalidetion };

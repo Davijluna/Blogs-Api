@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
-const { User } = require('../models');
-const { Category } = require('../models');
+const { User, Category, BlogPost } = require('../models');
+// const { Category } = require('../models');
+// const { PostCategory } = require('../models');
 require('dotenv').config();
 
 const login = async (body) => {
@@ -65,5 +66,28 @@ const getCategories = async (body) => {
   const result = await Category.findAll({ id, name });
   return { data: result, code: 200 };
 };
+//
+const setCategory = async () => { // mudar para "getPost"
+  const result = await BlogPost.findAll({ include: [
+    {
+      model: User,
+      as: 'user',
+      attributes: { exclude: ['password'] },
+    },
+    {
+      model: Category,
+      through: { attributes: [] },
+      as: 'categories' },
+  ],
+});
+  return { data: result, code: 200 };
+};
 
-module.exports = { login, creatUser, listUser, listUserId, postName, getCategories };
+module.exports = { 
+  login,
+  creatUser,
+  listUser,
+  listUserId,
+  postName,
+  getCategories,
+  setCategory };

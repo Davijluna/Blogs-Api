@@ -9,10 +9,7 @@ const BlogPost = (sequelize, DataTypes) => {
    content:DataTypes.STRING,
    userId:{
     type:DataTypes.INTEGER,
-    references:{
-      model:'Users',
-      key:'id'
-      },
+    foreignKey:true,
    },
    published:{
     type:DataTypes.DATE,
@@ -21,7 +18,10 @@ const BlogPost = (sequelize, DataTypes) => {
     type:DataTypes.DATE,
   },
   },
-  {timestemps:false}
+  {
+    createdAt: 'published',
+    updatedAt: 'updated',
+  }
   );
 
   BlogPost.associate = function(models){

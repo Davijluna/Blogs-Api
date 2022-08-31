@@ -4,7 +4,9 @@ const {
     listUser,
     listUserId,
     postName,
-    getCategories } = require('../services/userService');
+    getCategories,
+    setCategory,
+ } = require('../services/userService');
 
 const loginController = async (req, res) => {
     const { data, error, code } = await login(req.body);
@@ -42,10 +44,17 @@ const controllerGetCategories = async (req, res) => {
     return res.status(code).json(data);
 };
 
+const getAllCategory = async (req, res) => {
+    const { data, error, code } = await setCategory(req.params);
+    if (error) return res.status(code).json(error);
+    return res.status(code).json(data);
+};
+ 
 module.exports = {
         loginController,
         controllerCreate,
         controllerGetAll,
         controllerGetId,
         addNameTable,
-        controllerGetCategories };
+        controllerGetCategories,
+        getAllCategory };

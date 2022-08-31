@@ -26,9 +26,6 @@ module.exports = {
         allowNull:false,
       }
     },
-    {
-      timestamps: false,
-    }
     
     );
   },

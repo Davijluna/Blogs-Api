@@ -26,9 +26,6 @@ module.exports = {
         }
       }
      },
-     {
-      timestamps: false,
-    }
     );
   },
 

@@ -9,8 +9,6 @@ module.exports = {
         allowNull:false,
         autoIncrement:true,
         primaryKey:true,
-        onDelete:'CASCADE',
-        onUpdate: 'CASCADE',
       },
     title: {
       allowNull:false,
@@ -38,9 +36,6 @@ module.exports = {
     },
 
    },
-   {
-    timestamps: false,
-  }
   );
   },
 

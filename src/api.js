@@ -4,6 +4,7 @@ const {
      controllerCreate,
     controllerGetAll,
     controllerGetId,
+    addNameTable,
      } = require('./database/controllers/userController');
 // ...
 const app = express();
@@ -12,6 +13,7 @@ const {
      validEmail,
      validCaracter,
      lengthPassword,
+     validName,
  } = require('./middlewares/functionValidatin');
 
  const chekToken = require('./middlewares/validToken');
@@ -29,6 +31,8 @@ const {
  app.get('/user', chekToken, controllerGetAll);
 
  app.get('/user/:id', chekToken, controllerGetId);
+
+ app.post('/categories', chekToken, validName, addNameTable);//
 // ...
 
 // É importante exportar a constante `app`,

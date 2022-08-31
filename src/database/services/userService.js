@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
+const { Category } = require('../models');
 require('dotenv').config();
 
 const login = async (body) => {
@@ -52,4 +53,11 @@ const listUserId = async ({ id }) => {
   return { data: result, code: 200 };
 };
 
-module.exports = { login, creatUser, listUser, listUserId };
+const getName = async (body) => {
+  const { name } = body;
+  await Category.create({ name });
+  const result = await Category.findOne({ where: { name } });
+  return { data: result, code: 201 };
+};
+
+module.exports = { login, creatUser, listUser, listUserId, getName };

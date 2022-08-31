@@ -1,4 +1,4 @@
-const { login, creatUser, listUser, listUserId } = require('../services/userService');
+const { login, creatUser, listUser, listUserId, getName } = require('../services/userService');
 
 const loginController = async (req, res) => {
     const { data, error, code } = await login(req.body);
@@ -24,8 +24,15 @@ const controllerGetId = async (req, res) => {
     return res.status(code).json(data);
 };
 
+const addNameTable = async (req, res) => {
+    const { data, error, code } = await getName(req.body);
+    if (error) return res.status(code).json(error);
+    return res.status(code).json(data);
+};
+
 module.exports = {
         loginController,
         controllerCreate,
         controllerGetAll,
-        controllerGetId };
+        controllerGetId,
+        addNameTable };

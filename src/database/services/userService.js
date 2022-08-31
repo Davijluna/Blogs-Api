@@ -53,11 +53,17 @@ const listUserId = async ({ id }) => {
   return { data: result, code: 200 };
 };
 
-const getName = async (body) => {
+const postName = async (body) => {
   const { name } = body;
   await Category.create({ name });
   const result = await Category.findOne({ where: { name } });
   return { data: result, code: 201 };
 };
 
-module.exports = { login, creatUser, listUser, listUserId, getName };
+const getCategories = async (body) => {
+  const { id, name } = body;
+  const result = await Category.findAll({ id, name });
+  return { data: result, code: 200 };
+};
+
+module.exports = { login, creatUser, listUser, listUserId, postName, getCategories };

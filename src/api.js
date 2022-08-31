@@ -5,6 +5,7 @@ const {
     controllerGetAll,
     controllerGetId,
     addNameTable,
+    controllerGetCategories,
      } = require('./database/controllers/userController');
 // ...
 const app = express();
@@ -32,7 +33,9 @@ const {
 
  app.get('/user/:id', chekToken, controllerGetId);
 
- app.post('/categories', chekToken, validName, addNameTable);//
+ app.post('/categories', chekToken, validName, addNameTable);
+
+ app.get('/categories', chekToken, controllerGetCategories);//
 // ...
 
 // É importante exportar a constante `app`,

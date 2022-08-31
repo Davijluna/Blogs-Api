@@ -1,3 +1,4 @@
+
 const Category = (sequelize, DataTypes) => {
   const Category = sequelize.define("Category", {
     id:{
